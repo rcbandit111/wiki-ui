@@ -1,5 +1,4 @@
-// import {UserRoleType} from "@app/panel/domain/user-role-type";
-import {UserRoleType} from "../app/app/panel/domain/user-role-type";
+import { UserRoleType } from '../app/shared/models/panel/user-role-type';
 
 export const environment = {
   production: false,
