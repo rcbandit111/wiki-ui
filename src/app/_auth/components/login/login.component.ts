@@ -55,24 +55,7 @@ export class LoginComponent implements OnInit {
         const username = this.form.get('username').value;
       const password = this.form.get( 'password' ).value;
       debugger
-        // this._authService.login(username, password).subscribe((response) => {
-        //   console.log(response);
-        //   if( response.Status==0){
-        //     // this._snackbarService.openSnack(
-        //     //   response.Message,
-        //     //   NotificationTypeEnum.Success
-        //     // );
-        //     this.router.navigate(['/aepistle/home']);
-        //   }
-        //   else if(response.Status==2)
-        //   {
-        //     this._snackbarService.openSnack(
-        //       response.Message,
-        //       NotificationTypeEnum.Danger
-        //     );
-        //   }
 
-        // });
 
 
     } ;
