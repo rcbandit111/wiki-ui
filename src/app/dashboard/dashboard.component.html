@@ -1,0 +1,84 @@
+<app-login></app-login>
+<div>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav opened #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches"
+    fixedTopGap="56"
+    [style.width]="mobileQuery.matches ? '75%' : '15%'">
+    <mat-nav-list>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp;Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+        <a
+          class="hover"
+          routerLinkActive="active-list-item"
+          mat-list-item
+        >
+          <mat-icon color="white">dashboard</mat-icon>
+          <span class="nav-caption"
+            >&nbsp; Dashboard Item</span>
+        </a>
+    </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <p><button mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle</button></p>
+      <p>
+        Dashboard
+      </p>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  </div>
+
+  
