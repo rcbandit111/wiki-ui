@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "engine-ui"
+    }
+  },
+  "defaultProject": "engine-ui",
+  "cli": {
+    "analytics": "749f0805-4188-403c-9b31-016f14d8fe17"
+  }
 }
