@@ -18,18 +18,18 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
   async onSubmit() {
     this.loginInvalid = false;
     if (this.form.valid) {
-      const username = this.form.get('username').value;
+      const name = this.form.get('name').value;
       const password = this.form.get('password').value;
-      this.loginService.login(username, password).subscribe(
+      this.loginService.login(name, password).subscribe(
         () => {
-          alert(`username: ${username}, password: ${password}`);
+          alert(`name: ${name}, password: ${password}`);
         },
         (error) => {
           alert('error');

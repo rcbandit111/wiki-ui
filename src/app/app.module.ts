@@ -1,25 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatePasswordComponent } from './_auth/components/activate-password/activate-password.component';
 import { NewPasswordComponent } from './_auth/components/new-password/new-password.component';
 import { ResetPasswordComponent } from './_auth/components/reset-password/reset-password.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/material/material.module';
-import { LoginComponent } from './_auth/components/login/login.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { AuthHttpInterceptorService } from './_auth/services/auth-http-interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
-
-//LoginComponent,
     ActivatePasswordComponent,
     NewPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,12 +25,17 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
     HttpClientModule,
 
     BrowserAnimationsModule,
-     FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
