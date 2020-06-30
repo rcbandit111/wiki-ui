@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { Authorize } from '../models/backend/authorize';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +19,9 @@ export class LoginService {
     return this.httpClient.post(`http://185.185.126.15:8080/engine/users/authorize`, {
       name,
       password
-    }, {responseType: 'text'}).pipe(
-      map((token: any) => {
-        sessionStorage.setItem('token', token);
+    }).pipe(
+      map((response: Authorize) => {
+        sessionStorage.setItem('token', response.accessToken);
         return true;
       })
     );
