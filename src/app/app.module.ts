@@ -11,6 +11,7 @@ import { NewPasswordComponent } from './_auth/components/new-password/new-passwo
 import { ResetPasswordComponent } from './_auth/components/reset-password/reset-password.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { AuthHttpInterceptorService } from './_auth/services/auth-http-interceptor.service';
+import { DashboardComponent } from './_dashboard/components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,12 @@ import { AuthHttpInterceptorService } from './_auth/services/auth-http-intercept
     ActivatePasswordComponent,
     NewPasswordComponent,
     ResetPasswordComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
