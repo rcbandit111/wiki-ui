@@ -19,9 +19,9 @@ export class LoginService {
     formData.append('grant_type', 'password');
     formData.append('scope', 'read');
     const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(name)}`,
-      Username: name,
-      Password: password,
+      Authorization: `Basic ${btoa(`${name}:${password}`)}`,
+      username: name,
+      password,
       'Content-Type': 'multipart/form-data',
     });
     // TODO: noamb - move base url - 185.185.126.15:8089 - to environment
