@@ -22,7 +22,7 @@ export class LoginService {
       Authorization: `Basic ${btoa(`${name}:${password}`)}`,
       username: name,
       password,
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
     });
     // TODO: noamb - move base url - 185.185.126.15:8089 - to environment
     // TODO: noamb - wrap httpClient in a base service - getting the url desired, returning known response model

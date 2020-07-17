@@ -10,7 +10,8 @@ import { ActivatePasswordComponent } from './_auth/components/activate-password/
 import { NewPasswordComponent } from './_auth/components/new-password/new-password.component';
 import { ResetPasswordComponent } from './_auth/components/reset-password/reset-password.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
-import { AuthHttpInterceptorService } from './_auth/services/auth-http-interceptor.service';
+// import { AuthHttpInterceptorService } from './_auth/services/auth-http-interceptor.service';
+import { AuthInterceptor } from './_auth/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AuthHttpInterceptorService } from './_auth/services/auth-http-intercept
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptorService,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],
