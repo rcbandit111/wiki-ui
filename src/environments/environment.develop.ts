@@ -14,7 +14,7 @@ export const environment = {
     },
     urls: {
       auth: {
-        token: '/api/oauth/token'
+        token: 'http://185.185.126.15:8080/engine/oauth/token'
       },
       users: {
         requestReset: '/api/users/request',

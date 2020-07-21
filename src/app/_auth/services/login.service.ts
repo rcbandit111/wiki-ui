@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Authorize } from '../models/backend/authorize';
+import {environment} from "../../../environments/environment.develop";
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +25,9 @@ export class LoginService {
       password,
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-    // TODO: noamb - move base url - 185.185.126.15:8089 - to environment
     // TODO: noamb - wrap httpClient in a base service - getting the url desired, returning known response model
     return this.httpClient
-      .post(`http://185.185.126.15:8080/engine/oauth/token`, body.toString(), {
+      .post(environment.api.urls.auth.token , body.toString(), {
         headers,
         withCredentials: true,
       })
