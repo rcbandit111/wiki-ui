@@ -10,7 +10,6 @@ import { ActivatePasswordComponent } from './_auth/components/activate-password/
 import { NewPasswordComponent } from './_auth/components/new-password/new-password.component';
 import { ResetPasswordComponent } from './_auth/components/reset-password/reset-password.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
-// import { AuthHttpInterceptorService } from './_auth/services/auth-http-interceptor.service';
 import { AuthInterceptor } from './_auth/services/auth-interceptor.service';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { AuthInterceptor } from './_auth/services/auth-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
