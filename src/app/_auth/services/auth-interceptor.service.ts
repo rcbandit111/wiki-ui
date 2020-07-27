@@ -1,19 +1,21 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
   HttpErrorResponse
-} from "@angular/common/http";
-import { throwError, Observable, BehaviorSubject, of } from "rxjs";
-import { catchError, filter, finalize, take, switchMap } from "rxjs/operators";
+} from '@angular/common/http';
+
+import { throwError, Observable, BehaviorSubject, of } from 'rxjs';
+import { catchError, filter, finalize, take, switchMap } from 'rxjs/operators';
+
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private AUTH_HEADER = "Authorization";
-  private token = "token";
+  private AUTH_HEADER = 'Authorization';
+  private token = 'token';
   private refreshTokenInProgress = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
@@ -25,22 +27,20 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(req);
-
-    if (sessionStorage.getItem('token')) {
+    if (sessionStorage.getItem('access_token')) {
         req = req.clone({
           setHeaders: {
-            Authorization: sessionStorage.getItem('token'),
+            Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
           },
         });
     }
     if (!req.url.includes(`http://185.185.126.15:8080/engine/oauth/token`)) {
       return next.handle(req);
     }
-    console.warn("AuthInterceptor");
-    if (!req.headers.has("Content-Type")) {
+    console.warn('AuthInterceptor');
+    if (!req.headers.has('Content-Type')) {
       req = req.clone({
-        headers: req.headers.set("Content-Type", "application/json")
+        headers: req.headers.set('Content-Type', 'application/json')
       });
     }
 
@@ -82,7 +82,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private refreshAccessToken(): Observable<any> {
-    return of("secret token");
+    return of('secret token');
   }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
@@ -96,7 +96,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return request;
     }
     return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, "Bearer " + this.token)
+      headers: request.headers.set(this.AUTH_HEADER, 'Bearer ' + this.token)
     });
   }
 }

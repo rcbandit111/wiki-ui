@@ -33,7 +33,7 @@ export class LoginService {
       })
       .pipe(
         map((response: Authorize) => {
-          sessionStorage.setItem('token', response.accessToken);
+          sessionStorage.setItem('access_token', response.access_token);
           return true;
         })
       );

@@ -1,6 +1,8 @@
 export class Authorize {
-  accessToken: string;
-  tokenType: string;
-  role: string[];
-  expiresIn: number;
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  organization: string;
+  jti: string;
 }
