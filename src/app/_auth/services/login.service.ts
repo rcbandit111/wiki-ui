@@ -34,6 +34,7 @@ export class LoginService {
       .pipe(
         map((response: Authorize) => {
           sessionStorage.setItem('access_token', response.access_token);
+          sessionStorage.setItem('refresh_token', response.refresh_token);
           return true;
         })
       );

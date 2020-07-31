@@ -21,6 +21,7 @@ export class AuthService {
       )
     );
   }
+
   isUserLoggedIn() {
     const user = sessionStorage.getItem('username');
     return !(user === null);

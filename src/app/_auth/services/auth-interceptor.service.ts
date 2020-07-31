@@ -4,13 +4,15 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpClient
 } from '@angular/common/http';
 
 import { throwError, Observable, BehaviorSubject, of } from 'rxjs';
-import { catchError, filter, finalize, take, switchMap } from 'rxjs/operators';
+import { catchError, filter, finalize, take, switchMap, tap, map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -21,21 +23,28 @@ export class AuthInterceptor implements HttpInterceptor {
     null
   );
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private httpClient: HttpClient, private formBuilder: FormBuilder) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
+    if (req.url.includes(`http://185.185.126.15:8080/engine/oauth/token`)) {
+        req = req.clone({
+            setHeaders: {
+              Authorization: 'Basic YWRtaW46cXdlcnR5',
+            },
+        });
+        return next.handle(req);
+    }
+
     if (sessionStorage.getItem('access_token')) {
         req = req.clone({
           setHeaders: {
             Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
           },
         });
-    }
-    if (!req.url.includes(`http://185.185.126.15:8080/engine/oauth/token`)) {
-      return next.handle(req);
     }
     console.warn('AuthInterceptor');
     if (!req.headers.has('Content-Type')) {
@@ -49,31 +58,32 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
+
           // 401 errors are most likely going to be because we have an expired token that we need to refresh.
-          if (this.refreshTokenInProgress) {
+            if (this.refreshTokenInProgress) {
             // If refreshTokenInProgress is true, we will wait until refreshTokenSubject has a non-null value
             // which means the new token is ready and we can retry the request again
             return this.refreshTokenSubject.pipe(
-              filter(result => result !== null),
-              take(1),
-              switchMap(() => next.handle(this.addAuthenticationToken(req)))
+                filter(result => result !== null),
+                take(1),
+                switchMap(() => next.handle(this.addAuthenticationToken(req)))
             );
-          } else {
+            } else {
             this.refreshTokenInProgress = true;
 
             // Set the refreshTokenSubject to null so that subsequent API calls will wait until the new token has been retrieved
             this.refreshTokenSubject.next(null);
 
             return this.refreshAccessToken().pipe(
-              switchMap((success: boolean) => {
-                this.refreshTokenSubject.next(success);
-                return next.handle(this.addAuthenticationToken(req));
-              }),
-              // When the call to refreshToken completes we reset the refreshTokenInProgress to false
-              // for the next time the token needs to be refreshed
-              finalize(() => (this.refreshTokenInProgress = false))
+                switchMap((success: string) => {
+                    this.refreshTokenSubject.next(success);
+                    return next.handle(this.addAuthenticationToken(req));
+                }),
+                // When the call to refreshToken completes we reset the refreshTokenInProgress to false
+                // for the next time the token needs to be refreshed
+                finalize(() => (this.refreshTokenInProgress = false))
             );
-          }
+            }
         } else {
           return throwError(error);
         }
@@ -82,21 +92,42 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private refreshAccessToken(): Observable<any> {
-    return of('secret token');
-  }
+
+    const formData = new FormData();
+    formData.append('grant_type', 'refresh_token');
+    formData.append('scope', 'read');
+    formData.append('refresh_token', sessionStorage.getItem('refresh_token'));
+
+    return this.httpClient.post<any>(`http://185.185.126.15:8080/engine/oauth/token`, formData)
+        .pipe(
+            tap((response) => {
+                sessionStorage.setItem('access_token', response.access_token);
+                sessionStorage.setItem('refresh_token', response.refresh_token);
+            }),
+            map(response => {
+               return response.refresh_token;
+            })
+        );
+    }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
     // If we do not have a token yet then we should not set the header.
     // Here we could first retrieve the token from where we store it.
-    if (!this.token) {
-      return request;
-    }
+    // if (!this.token) {
+    //   return request;
+    // }
     // If you are calling an outside domain then do not add the token.
-    if (!request.url.match(/www.mydomain.com\//)) {
-      return request;
-    }
-    return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, 'Bearer ' + this.token)
+    // if (!request.url.match(/www.mydomain.com\//)) {
+    //   return request;
+    // }
+
+    request = request.clone({
+        setHeaders: {
+            Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+        },
     });
+
+    console.log('change header');
+    return request;
   }
 }
