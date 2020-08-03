@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { LoginService } from '../../services/login.service';
 
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   randomImgURL: any;
   language: string;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {}
 
   async ngOnInit() {
     this.form = this.fb.group({
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
       const password = this.form.get('password').value;
       this.loginService.login(name, password).subscribe(
         () => {
-          alert(`name: ${name}, password: ${password}`);
+          this.router.navigate(['dashboard']);
         },
         (error) => {
           alert('error');
