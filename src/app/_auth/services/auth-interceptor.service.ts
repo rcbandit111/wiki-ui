@@ -74,22 +74,13 @@ export class AuthInterceptor implements HttpInterceptor {
                 switchMap(() => next.handle(this.addAuthenticationToken(req)))
             );
             } else {
-            this.refreshTokenInProgress = true;
+              this.refreshTokenInProgress = true;
 
-            // Set the refreshTokenSubject to null so that subsequent API calls will wait until the new token has been retrieved
-            this.refreshTokenSubject.next(null);
+              // Set the refreshTokenSubject to null so that subsequent API calls will wait until the new token has been retrieved
+              this.refreshTokenSubject.next(null);
 
-            this.router.navigateByUrl('account');
-            return;
-            return this.refreshAccessToken().pipe(
-                switchMap((success: string) => {
-                    this.refreshTokenSubject.next(success);
-                    return next.handle(this.addAuthenticationToken(req));
-                }),
-                // When the call to refreshToken completes we reset the refreshTokenInProgress to false
-                // for the next time the token needs to be refreshed
-                finalize(() => (this.refreshTokenInProgress = false))
-            );
+              this.router.navigateByUrl('account');
+              return of(null);
             }
         } else {
           return throwError(error);
