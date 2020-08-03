@@ -13,6 +13,7 @@ import { catchError, filter, finalize, take, switchMap, tap, map } from 'rxjs/op
 
 import { AuthService } from './auth.service';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -23,7 +24,11 @@ export class AuthInterceptor implements HttpInterceptor {
     null
   );
 
-  constructor(public auth: AuthService, private httpClient: HttpClient, private formBuilder: FormBuilder) {}
+  constructor(
+    public auth: AuthService,
+    private httpClient: HttpClient,
+    private formBuilder: FormBuilder,
+    private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -74,6 +79,8 @@ export class AuthInterceptor implements HttpInterceptor {
             // Set the refreshTokenSubject to null so that subsequent API calls will wait until the new token has been retrieved
             this.refreshTokenSubject.next(null);
 
+            this.router.navigateByUrl('account');
+            return;
             return this.refreshAccessToken().pipe(
                 switchMap((success: string) => {
                     this.refreshTokenSubject.next(success);
