@@ -14,6 +14,7 @@ export const environment = {
     },
     urls: {
       auth: {
+        authorize: 'http://185.185.126.15:8080/engine/oauth/authorize',
         token: 'http://185.185.126.15:8080/engine/oauth/token'
       },
       users: {
