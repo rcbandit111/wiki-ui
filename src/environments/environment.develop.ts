@@ -14,7 +14,7 @@ export const environment = {
     },
     urls: {
       auth: {
-        token: 'http://185.185.126.15:8080/engine/oauth/token'
+        token: 'http://localhost:8080/engine/oauth/token'
       },
       users: {
         requestReset: '/api/users/request',
@@ -30,6 +30,9 @@ export const environment = {
         get: (id: number) => `/api/users/${id}`,
         persist: (id: number) => `/api/users/${id}`,
         export: '/api/users/export'
+      },
+      dashboard: {
+        dataPage: 'http://localhost:8080/engine/data/page'
       }
     },
     unauthorizedUrls: [

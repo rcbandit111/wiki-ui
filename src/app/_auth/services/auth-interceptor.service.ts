@@ -14,6 +14,7 @@ import { catchError, filter, finalize, take, switchMap, tap, map } from 'rxjs/op
 import { AuthService } from './auth.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import {environment} from "../../../environments/environment.develop";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -35,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    if (req.url.includes(`http://185.185.126.15:8080/engine/oauth/token`)) {
+    if (req.url.includes(environment.api.urls.auth.token)) {
         req = req.clone({
             setHeaders: {
               Authorization: 'Basic YWRtaW46cXdlcnR5',
@@ -96,7 +97,7 @@ export class AuthInterceptor implements HttpInterceptor {
     formData.append('scope', 'read');
     formData.append('refresh_token', sessionStorage.getItem('refresh_token'));
 
-    return this.httpClient.post<any>(`http://185.185.126.15:8080/engine/oauth/token`, formData)
+    return this.httpClient.post<any>(environment.api.urls.auth.token, formData)
         .pipe(
             tap((response) => {
                 sessionStorage.setItem('access_token', response.access_token);

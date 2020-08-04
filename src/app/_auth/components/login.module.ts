@@ -7,8 +7,8 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { MatSnackBarService, NotificationTypeEnum }
   from 'src/app/_auth/services/mat-snack-bar.service';
 import {   Directive,OnInit, EventEmitter, Output, OnDestroy, Input,ElementRef,Renderer } from '@angular/core';
- 
-//paste inside declartion
+
+//paste inside declaration
 @NgModule({
   declarations: [LoginComponent
   ],

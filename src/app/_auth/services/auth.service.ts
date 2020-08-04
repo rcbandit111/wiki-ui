@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {environment} from "../../../environments/environment.develop";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
 
   authenticate(username, password) {
     // TODO: noamb - get root api path from environment
-    return this.httpClient.post<any>('http://localhost:8080/authenticate', { username, password }).pipe(
+    return this.httpClient.post<any>(environment.api.urls.auth.token, { username, password }).pipe(
       map(
         userData => {
           sessionStorage.setItem('username', username);
