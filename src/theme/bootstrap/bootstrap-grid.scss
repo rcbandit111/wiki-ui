@@ -1,0 +1,32 @@
+/*!
+ * Bootstrap Grid v4.0.0 (https://getbootstrap.com)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+@at-root {
+  @-ms-viewport { width: device-width; } // stylelint-disable-line at-rule-no-vendor-prefix
+}
+
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+@import "functions";
+@import "variables";
+
+@import "src/theme/bootstrap/mixins/breakpoints";
+@import "src/theme/bootstrap/mixins/grid-framework";
+@import "src/theme/bootstrap/mixins/grid";
+
+@import "grid";
+@import "src/theme/bootstrap/utilities/display";
+@import "src/theme/bootstrap/utilities/flex";

@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+// @import "~@ng-select/ng-select/themes/material.theme.css";
+
+// Icons
+@import "src/assets/icons/batch-icons/style.css";
+@import "src/assets/icons/dashicons/dashicons.css";
+@import "src/assets/icons/dripicons/webfont.css";
+@import "src/assets/icons/eightyshades/style.css";
+@import "src/assets/icons/entypo/style.css";
+@import "src/assets/icons/feather/style.css";
+@import "src/assets/icons/font-awesome/css/font-awesome.css";
+@import "src/assets/icons/foundation-icon-font/foundation-icons.css";
+@import "src/assets/icons/ligature-symbols/style.css";
+@import "src/assets/icons/metrize-icons/style.css";
+@import "src/assets/icons/picons-social/style.css";
+@import "src/assets/icons/simple-line-icons/css/simple-line-icons.css";
+@import "src/assets/icons/themefy/themify-icons.css";
+@import "src/assets/icons/typicons/typicons.css";
+@import "src/assets/icons/weather-icons/css/weather-icons.css";
+@import "src/assets/icons/weather-icons/css/weather-icons-wind.css";
+
+@import "src/theme/main";
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+}
+.invalid-feedback-custom {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.elevated-container {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+
+  margin-bottom: 20px;
+}
+.header-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle-button {
+  margin-right: 10px;
+  padding: 2px;
+}
+
+.title {
+  margin-top: 15px;
+}
+
+.chart-element-box > chart {
+  height: 250px;
+}
+
+.ngx-text-highlight{
+  background:yellow!important;
+}
+
+.ng-select.ng-select-focused.custom{
+  .ng-select-container {
+      border-width: 2px!important;
+      border-color: #047bf8!important;
+      box-shadow: none;
+  }
+}
+
+.ng-select.custom {
+  &.has-error {
+    .ng-select-container {
+    border-color: #e65252!important;
+    }
+  }
+  .ng-select-container {
+    border-color: #dde2ec;
+    border-width: 2px;
+    .ng-value-container {
+      .ng-value {
+        background-color: #e2ebff!important;
+        border: 1px solid #4771d2;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: #3E4B5B;
+        span.ng-value-icon.left{
+          font-weight: bold;
+          border: none;
+          padding: 0px 3px 0px 3px;
+          margin-left: 2px;
+        }
+        span.ng-value-label{
+          font-weight: 300;
+          padding: 1px 5px 2px 0px;
+
+        }
+      }
+      .ng-input{
+        input{
+          cursor: text;
+        }
+      }
+    }
+  }
+}
+
+.alertify-notifier .ajs-message.ajs-success {
+  color: #ffffff;
+  background-color: #6acb5f;
+  text-shadow: none;
+}
+
+.ngx-toastr {
+  width: 100%!important;
+  text-align: center;
+  background-color: #047bf8!important;
+  background-image: none!important;
+}
+
+

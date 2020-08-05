@@ -1,0 +1,27 @@
+.badge {
+  font-size: $font-size-base * 0.9;
+}
+
+.badge-default-inverted {
+  @include badge-variant-inverted($secondary);
+}
+
+.badge-primary-inverted {
+  @include badge-variant-inverted($primary);
+}
+
+.badge-success-inverted {
+  @include badge-variant-inverted($success);
+}
+
+.badge-info-inverted {
+  @include badge-variant-inverted($info);
+}
+
+.badge-warning-inverted {
+  @include badge-variant-inverted($warning);
+}
+
+.badge-danger-inverted {
+  @include badge-variant-inverted($danger);
+}
