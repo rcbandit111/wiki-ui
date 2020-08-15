@@ -1,5 +1,6 @@
 import { UserRoleType } from '../app/shared/models/panel/user-role-type';
 
+const baseUrl = 'http://localhost:8080';
 export const environment = {
   production: false,
   config: {
@@ -14,22 +15,25 @@ export const environment = {
     },
     urls: {
       auth: {
-        token: '/api/oauth/token'
+        token: baseUrl + '/engine/oauth/token'
       },
       users: {
-        requestReset: '/api/users/request',
-        confirmation_token: '/api/users/confirmation_token',
-        reset_token: '/api/users/reset_token',
-        reset_confirmation: '/api/users/reset_confirmation',
-        reset_password: '/api/users/reset_password',
-        reset_user_password: '/api/users/reset_user_password',
-        reset: '/api/users/reset',
-        base: '/api/users/pages',
-        find: '/api/users/find',
-        create: '/api/users/create',
+        requestReset: baseUrl + '/engine/users/request',
+        confirmation_token: baseUrl + '/engine/users/confirmation_token',
+        reset_token: baseUrl + '/engine/users/reset_token',
+        reset_confirmation: baseUrl + '/engine/users/reset_confirmation',
+        reset_password: baseUrl + '/engine/users/reset_password',
+        reset_user_password: baseUrl + '/engine/users/reset_user_password',
+        reset: baseUrl + '/engine/users/reset',
+        base: baseUrl + '/engine/users/pages',
+        find: baseUrl + '/engine/users/find',
+        create: baseUrl + '/engine/users/create',
         get: (id: number) => `/api/users/${id}`,
         persist: (id: number) => `/api/users/${id}`,
-        export: '/api/users/export'
+        export: baseUrl + '/engine/users/export'
+      },
+      dashboard: {
+        dataPage: baseUrl + '/engine/data/page'
       }
     },
     unauthorizedUrls: [

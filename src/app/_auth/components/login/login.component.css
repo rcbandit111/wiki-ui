@@ -1,0 +1,9 @@
+mat-card {
+  max-width: 50em;
+  margin: 2em auto;
+  text-align: center;
+}
+mat-form-field {
+  display: block;
+  margin-bottom: 3em;
+}
